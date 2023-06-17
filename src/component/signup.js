@@ -1,19 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import '../App.css';
 import React, { useState } from 'react';
-import Signup from './component/signup';
-function App(){
-  return(
-<Signup/>
-  );
-}
 
-/* function App() {
+function Signup() {
 const [name,setName]=useState('');
 const [email,setEmail]=useState('');
 const [password,setPassword]=useState('');
 const [confirmPassword,setConfirmPassword]=useState('');
-const [success,setsuccess]=useState('');
+const [Success,setSuccess]=useState('');
 const [error,setError]=useState('');
 
 const handleSignup=(e)=>{
@@ -21,13 +14,32 @@ const handleSignup=(e)=>{
   e.preventDefault();
  
   if(!name || !email || !password || !confirmPassword){
-    setError("Error : All fields are mandetory");
+    setSuccess("");
+    setError("Error : All the fields are mandatory");
+    return;
+  }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    setError('Please Enter A Valid Email Address ');
     return;
   }
  
   if(password!==confirmPassword)
   {
+    setSuccess("");
     setError("Password Mismatch");
+    return;
+  }
+  else{
+    setError("");
+    setSuccess("Successfully Signed Up!");
+    setTimeout(()=>{
+        setName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setSuccess("");
+    },2000);
+    
     return;
   }
 
@@ -64,14 +76,14 @@ const handleSignup=(e)=>{
                          onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    
+                    {/* <div id="msg" className="form-status"></div> */}
                     <div className="message">
                     {error && <div className="error">{error}</div>}
-                    {success && <div className="success">{success}</div>}
+                    {Success && <div className="success">{Success}</div>}
                     <button onClick={handleSignup} className="btn">Signup</button>
                    
                      </div>
-                    
+                    {/* <button id="signup-btn" class="btn" type="submit">Signup</button> */}
 
       </div>
       
@@ -80,5 +92,5 @@ const handleSignup=(e)=>{
     </div>
   );
 }
-*/
-export default App; 
+
+export default Signup;
